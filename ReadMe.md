@@ -42,7 +42,7 @@ git clone “https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks.git”&& c
 
 #### 结构
 
-数据集：**5**个类别，**13**个数据集
+数据集：**5**个类别，**12**个数据集
 
 5个类别（每个类别包含1-3个数据集）
 
