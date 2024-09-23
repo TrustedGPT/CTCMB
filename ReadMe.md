@@ -52,7 +52,7 @@ git clone “https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks.git”&& c
 - 中医语言理解：评估模型对中医专业语言的理解。
 - 中医诊断：评估模型运用四诊合参的诊断能力。
 
-TCM-ED  TCM-DS  TCM-SRT 为客观题  其余为主观题，其中TCM-ED包含A型题（最佳选择题）、B型题（病历摘要型最佳选择题）、C型题（共用题干选择题）以及D型题（共用选项选择题）。
+TCM-ED  TCM-DS  TCM-SRT 为客观题,其余为主观题，其中TCM-ED包含A型题（最佳选择题）、B型题（病历摘要型最佳选择题）、C型题（共用题干选择题）以及D型题（共用选项选择题）。
 
 #### 详细信息
 
