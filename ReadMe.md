@@ -3,12 +3,10 @@
 （1）Zip格式
 
 ```python
-git clone “https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks.git”&& cd TCM-Assessment-Benchmarks/data
+git clone "https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks.git"&& cd TCM-Assessment-Benchmarks/data
 ```
 
-（2）[百度云链接](通过网盘分享的文件：TCM-Assessment-Benchmarks
-链接: https://pan.baidu.com/s/1T91QMVJJR7IfkIoL6KCdGA?pwd=3iu2 提取码: 3iu2 
---来自百度网盘超级会员v6的分享)
+（2）[百度云链接](https://pan.baidu.com/s/1T91QMVJJR7IfkIoL6KCdGA?pwd=3iu2)
 
 
 
