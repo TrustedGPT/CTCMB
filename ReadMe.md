@@ -38,7 +38,7 @@ git clone “https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks.git”&& c
 
 ## 😊数据集描述
 
-![pie-nest](C:\Users\30702\AppData\Local\Temp\360zip$Temp\360$0\pie-nest.png)
+![pie-nest](https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks/blob/main/pics/pie-nest.png)
 
 #### 结构
 
