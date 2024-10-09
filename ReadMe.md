@@ -98,144 +98,136 @@ TCM-ED  TCM-DS  TCM-SRT 为客观题,其余为主观题，其中TCM-ED包含A型
 
 ## 🔆如何提交和评估
 
-- ### **环境配置**
+### 环境配置
 
 
 确保你的开发环境已经安装了[文件](https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks/blob/main/requirements.txt)要求的Python库
 
-- ###  配置 API 密钥和 URL
 
-在这里，只提供`openai`、`Spart`、`ERNIE`调用方式的配置模版，如果调用模型有其他需求，请按照样例修改。
 
-在使用本项目之前，你需要配置 `api_key` 和 `base_url`。请遵循以下步骤：
 
-1. **创建一个配置文件**：在项目根目录下创建一个名为 `config.py` 的文件，内容如下：
 
-   ```
-   # config.py
-   API_KEY = "your_api_key_here"
-   BASE_URL = "your_base_url_here"
-   ```
+### 问答模块
 
-2. **修改 `LlmChat` 类**：在 `LlmChat` 类中导入配置文件，并使用配置文件中的值替换默认值。
+目前提供基于OpenAI库的调用模版，并且提供三套HuggingFace上开源库的调用模版，分别是`HuatuoGPT-II`，`Taiyi-LLM`和`WiNGPT2`调用。如果需要其他更多调用的支持，请继承自`make_answer/chat/chat_invoker.py`模块中的`ChatInvoker`接口。
 
-   ```
-   from openai import OpenAI
-   from ratelimit import limits, sleep_and_retry
-   from tenacity import retry, wait_random_exponential, stop_after_attempt
-   from loguru import logger
-   from config import API_KEY, BASE_URL  # 导入配置文件
-   class LlmChat:
-       history = []
-       
-       def __init__(self, model: str = ""):
-           self.model = model
-           self.client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
-   
-       def chat(self, msg: str, role_prompt: str = "你是一个专业中医医生，能够准确全面的解答中医问题。本次对话，均只采用中文提问和回答。"):
-           messages = [{"role": "system", "content": role_prompt}, {"role": "user", "content": msg}]
-           response = self.client.chat.completions.create(model=self.model, messages=messages)
-           logger.info(response)
-           
-           # 检查 response 是否为空或结构异常
-           if response and response.choices and response.choices[0].message:
-               return response.choices[0].message.content
-           else:
-               print(f"错误：没有收到有效的响应，消息: {msg}")
-               return None
-   ```
+#### 基于OpenAI库的调用模版
 
-不同的大模型有不同的 SDK 和 API 接口。你需要根据具体的模型提供商提供的文档来调整你的代码。
+`模块名.调用llm文件`.py
 
-#### Spark4.0 Ultra
 
-    from sparkai.core.messages import ChatMessage
-    from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
-    class LlmChat:
-        history = []
-    
-        def __init__(self, model: str = ""):
-            self.model = model
-            self.client = ChatSparkLLM(
-                spark_api_url="wss://spark-api.xf-yun.com/v4.0/chat",
-                spark_app_id="5ef2ecc1",
-                spark_api_key="",
-                spark_api_secret="",
-                spark_llm_domain="4.0Ultra",
-                streaming=False,
-            )
-        def chat(self, msg: str,
-                 role_prompt: str = "你是一个专业中医医生，能够准确全面的解答中医问题。本次对话，均只采用中文提问和回答。"):
-            messages = [ChatMessage(role="system", content=role_prompt), ChatMessage(role="user", content=msg)]
-            handler = ChunkPrintHandler()
-            response = self.client.generate([messages], callbacks=[handler])
-            if response and response.generations and response.generations[0][0].text:
-                return response.generations[0][0].text
-            else:
-                print(f"错误：没有收到有效的响应，消息: {msg}")
-                return None
-
-#### ERNIE-4.0-8K-Latest
-
-```
-import qianfan
+```python
 import os
+import openai
 
-os.environ["QIANFAN_AK"] = ""
-os.environ["QIANFAN_SK"] = ""
+from loguru import logger
+from make_answer.chat.chat_invoker import ChatInvoker
 
-class LlmChat:
-    history = []
 
-def __init__(self,model: str = ""):
-    self.client = qianfan.ChatCompletion()
-    self.model_name = model
+class LlmOpenai(ChatInvoker):
+    def __init__(self, *args, **kwargs):
+        base_url = os.environ.get("OPENAI_BASE_URL")
+        if "base_url" in kwargs:
+            base_url = kwargs["base_url"]
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if "api_key" in kwargs:
+            api_key = kwargs["api_key"]
+        self.client = openai.OpenAI(
+            base_url=base_url, api_key=api_key)
+        self.model_name = kwargs["model_name"]
 
-def chat(self, msg: str,role_prompt: str = "你是一个专业中医医生，能够准确全面的解答中医问题。本次对话，均只采用中文提问和回答。"):
-    response = self.client.do(model=self.model_name, messages=[
-        {
-            "role": "user",
-            "content": role_prompt+msg
-        }
-        ])
-    if response["body"]:
-        return response["body"]["result"]
-    else:
-        raise ValueError("Empty response from API")
+    def chat(self, msg: str, *args, **kwargs) -> str:
+        response = self.client.chat.completions.create(
+            model=self.model_name,
+            messages=[
+                {"role": "system", "content": "你是一个专业中医医生，能够准确全面的解答中医问题。本次对话，均只采用中文提问和回答。"},
+                {"role": "user", "content": msg}
+            ]
+        )
+        try:
+            ret = response.choices[0].message.content
+        except Exception as e:
+            logger.exception(f"call openai chat api error: {response}")
+            raise e
+
+        return ret
 ```
 
-- ### 运行项目
+##### 使用方式
 
+```python
+python main.py \
+--step-chat data/ \ # 测试问题所在文件夹
+--api-model 模块名.调用llm文件.类名 \ # 自定义测试模型，需要继承自ChatInvoker，传入完整模块名、文件名和类名
+--api-model-name 调用的大模型名称 \ # 大模型名称，用于区分调用的不同模型，以及不同模型结果
+--base-url 模型调用url \ # 模型url
+--api-key 模型key  # 调用模型key
+```
+
+##### 基于OpenAI库的调用示例
 
 ```
-#example_input.csv 保存了所有数据集的路径
-python run.py -i example_input.csv -m model_name
+python main.py --step-chat data --api-model make_answer.chat.remote.openai_api.LlmOpenai --llm-name your_model_name  --base-url your_url --api-key your——key --num-process 12
 ```
 
-`example_intpu.csv`文件格式要求：`question_id`代表处理不同数据使用的不同评估方法，`file`代表着传入的数据，这些[数据格式](#数据集描述)必须满足超链接中的要求。
 
-完整的`example_input.csv`如下：
 
+#### 基于本地调用形式
+
+`模块名.调用llm文件`.py
+
+```python
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+from make_answer.chat.chat_invoker import ChatInvoker
+
+
+class LocalLLM(ChatInvoker):
+    def __init__(self, model_path: str, gpu_id: int = 0):
+        # 模型初始化，仅在首次运行时执行。
+
+    def chat(
+            self, msg: str, *args, **kwargs
+    ) -> str:
+        # 请求模型回答，msg为必填参数。
 ```
-question_id,file
-1.1,data/A_problem.json
-1.2,data/B_problem.json
-2,data/2.TCM-DS Dataset.json
-3,data/3.TCM-DID Dataset.json
-4,data/4.TCM-FT.json
-5,data/5.TCM-CHGD.json
-6,data/6.Med-Treat.json
-7,data/7.TCM-Clin.json
-8,data/8.TCMeEE.json
-10,data/10.TCM-SRT.json
-11,data/11.CMeEE.json
-12,data/12.CHIP-CTC.json
-13,data/13.CHIP-CDEE.json
-14,data/14.IMCS-V2-MRG.json
-1.3,data/C_problem.json
-1.4,data/D_problem.json
-9,data/TCM-LitData.json
+
+##### 使用方式
+
+```python
+python main.py \
+--step-chat data/ \ # 测试问题所在文件夹
+--local-model /Path/To/LLM \ # 本地大模型所在目录
+--chat-func-name LLM名称 # 大模型名称，需要将自定模版构造函数写在：make_answer/chat/__init__.py的name_model_dict中。
 ```
+
+
+
+### 评估模块
+
+使用方式
+
+```python
+python main.py \
+--step-evaluate LLM回答所在目录 \ # 一般情况下， 传入根目录下模型名称
+--standard-answer-root 标准答案目录 # 传入标准答案目录
+```
+
+
+
+### 其他参数
+
+ 
+
+| 参数名称      | 默认值 | 作用                               |
+| ------------- | ------ | ---------------------------------- |
+| --num-process | 1      | 调用大模型回答以及评估时并发线程数 |
+| --sleep-time  | 0      | 大模型单次回答后，等待的时间。     |
+
+
+
+
 
 ## 致谢
 
