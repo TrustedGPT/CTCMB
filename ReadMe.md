@@ -9,7 +9,7 @@
 
 <p align="center">
    📃 <a href="" target="_blank">Paper</a> • 🌐 <a href="" target="_blank">Website</a>  
-   <br>  <a href="https://github.com/TrustedGPT/CTCMB/ReadMe_cn.md">   中文</a> | <a href="https://github.com/TrustedGPT/CTCMB/ReadMe.md"> English
+   <br>  <a href="https://github.com/TrustedGPT/CTCMB/blob/main/ReadMe_cn.md">   中文</a> | <a href="https://github.com/TrustedGPT/CTCMB/blob/main/ReadMe.md"> English
 </p>
 
 
