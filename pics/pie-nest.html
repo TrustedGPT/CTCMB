@@ -1,0 +1,158 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=pie-nest&lang=js&version=5.5.1&code=PYBwLglsB2AEC8sDeAoWszGAG0iAXMmuhgE4QDmFApqYQOQRjUC29ANMegGbCksBDMMzqx6SAQF9YAHgBGpAPQA-JHMmEkAY2kAKJABNJAUgCU9YpM7ps1GtAOausA0IGEA2s_T0AIhFJqLTAObzEAWQFSAGtqSGgKUJISegBlaiitAAtYAFEEiGhqJOSxXMEIbBLk-gBVaCg4AEEDAGdqlIA1CANqYFgW9utS-gAhAR6AVw6fAHEsClsZsVHCxOGagHkwLNp25wBdS2HW2ghqVs9nVFLYaAEWagYmrS0L1tgAMVJgNg2SMAATxATzEIHOy1OtmC1AM4WAvQYrTWS3-6FIAgMEEml1gHgADOwxABmfHGegHNGwbACOTUbBOW5hHh8QTCWiEABEakkAB1oIYTJyqegQMBkZAYFzgJMwMjesLmbBeNAwKkIAAvUEARmJYSsYRpdOwABlCqCbrdYK0ssAAO6EMCkSbUfVU1xgdx4pVIWAANwE2BdhAAnAAmQl3B6g-iAWjlANzKgFP3QBj0fzkoA71MAKt70WAGq3If2B4OwUmR-6PBjxwBm2oBb6MAAFH8wD4roAEIxSuZFBYDQdBEbL0YYCcAFcaAMBd6Hmrb6u8Xtfi-xWxAn6_zh4BjyLb49uk6LoIALLOieWYwnAFPRgFrTHMbkhHZKXy3JQ_PV7vL4_P5hIEghjg4pUjFYnGePQABs2rkkS9AABwAKzkpShq0vSZpFIyVq2AkOyEKSbrwcaKG3Lw_BCCIDBqAAPjygBY_5I2jSMgIKkORRjGLRyzoHIAhaNEFA_JMDgAMI4HwDAAMSfEBnwQZ8fGsbAch8L0pACdgQliMJEF8RBvgQbkMlyaQCkAOo9BhsDah2ekKQASpi2K4juHbkNkeFWl6d75rAWiCaI9DCUBuQAOz4v5IYyck2DmgAEtQlBZGAhBhmGHbJIGlDQAwbyqrQFjue2SroFkohufmFm0EpKk-epmnaaFJB2sZWQMDOZI1Wx8m0EZBgmWZeUkLsMVxbA-I9ZetxyM5-aecp3nCTufFQfiUEQS1yowGqmo6vZPUsqqBnRRQsUMHJ2AGMt4VFFF_WYXqOUjaU9HjVak3lcJ3Cvct7GcdxMr8V5ImzfNi3LSAmJYgknjEkSO5wTlrX6bQ1n_nZw1KpI2G3B6XpePmW7doQ_kRge_ZiAAKnx4QALS5L4F4djj077lG870KTFO-AAktTuXY4WuOmQzD4k2TNMoD6PP03OMYs9QuQ6VzE5izq_NE2kfGc7d6B04rEsMCz5N8RFsxqyKotTlrhNM7rqSWcTwvc6bhBNebMapAACkbSoe5uCsO0rFtk-TZpgL4bjCyLdvbj72sRLC5PE4EQi2_L9t81HzP-3xZ2J17ye9k7Ov-74qRZ1ezio-gRySAA3EAA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts-gl/2/files/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts-stat/latest/files/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts-graph-modularity/2/files/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts/4.9.0/files/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b}: {c} ({d}%)'
+  },
+  legend: {
+    data: [
+      'Direct',
+      'Marketing',
+      'Search Engine',
+      'Email',
+      'Union Ads',
+      'Video Ads',
+      'Baidu',
+      'Google',
+      'Bing',
+      'Others'
+    ]
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      selectedMode: 'single',
+      radius: [0, '30%'],
+      label: {
+      
+        formatter: "{b}\n{d}%",
+        position: "outside",
+        fontSize: 13
+      },
+      labelLine: {
+        show: true
+      },
+      data: [
+        { value: 920, name: '中医知识\n    问答' },
+        { value: 300, name: '医学语言\n生成   ' },
+        { value: 200, name: '中医推理'},
+        { value: 100, name: '中医语言\n理解   ' },
+        { value: 400, name: '中医诊断' },
+      ]
+    },
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: ['61%', '85%'],
+      labelLine: {
+        length: 30
+      },
+      label: {
+        formatter: '{b|{b}：}{c}  {per|{d}%}  ',
+        backgroundColor: '#F6F8FC',
+        borderColor: '#8C8D8E',
+        borderWidth: 1,
+        borderRadius: 4,
+        rich: {
+          a: {
+            color: '#6E7079',
+            lineHeight: 22,
+            align: 'center'
+          },
+          hr: {
+            borderColor: '#8C8D8E',
+            width: '100%',
+            borderWidth: 1,
+            height: 0
+          },
+          b: {
+            color: '#4C5058',
+            fontSize: 14,
+            fontWeight: 'bold',
+            lineHeight: 33
+          },
+          per: {
+            color: '#fff',
+            backgroundColor: '#4C5058',
+            padding: [3, 4],
+            borderRadius: 4
+          }
+        }
+      },
+      data: [
+        { value: 720, name: 'TCM-ED' },
+        { value: 100, name: 'TCM-DID' },
+        { value: 100, name: 'TCM' },
+
+        { value: 100, name: 'TCMeEE' },
+        { value: 100, name: 'SCD' },
+        { value: 100, name: 'TCM-CHGD' },
+       
+        { value: 100, name: 'TCM-SRT' },
+        { value: 100, name: 'SPD' },
+        
+        
+      { value: 100, name: 'TCM-LitData' },
+
+
+        { value: 100, name: 'Med-Treat' },
+        { value: 100, name: 'TCM-Clin' },
+        { value: 200, name: 'TCM-DS' },
+      ]
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
