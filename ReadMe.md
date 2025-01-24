@@ -84,7 +84,7 @@ TCM-ED, TCM-DS, and TCM-SRT are objective questions, while the rest are subjecti
 
 ####  Detailed Information
 
-**By clicking the hyperlink, you can access the format requirements for various datasets.**⬅️⬅️
+**By clicking the hyperlink, you can access the format requirements for various datasets.**
 
 | Primary Catalogues | Secondary Catalogues                                 | Quantity | Data Sources                                         | Evaluation Methods           |
 | :----------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ | ------------------------------------ |
