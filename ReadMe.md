@@ -24,7 +24,7 @@
 （1）ZIP format
 
 ```python
-git clone "https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks.git"&& cd TCM-Assessment-Benchmarks/data
+https://github.com/TrustedGPT/CTCMB.git && cd data
 ```
 
 （2）[Baidu Netdisk Link](https://pan.baidu.com/s/1T91QMVJJR7IfkIoL6KCdGA?pwd=3iu2)
