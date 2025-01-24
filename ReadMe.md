@@ -275,7 +275,7 @@ Please submit your files in a compressed package, such as **gemini-1.5-pro.zip**
 If you have any questions, feel free to contact us.
 ## Acknowledgments
 
-We would like to extend our heartfelt thanks to XXX for the tremendous support provided to this project. 🎉🎉🎉
+We sincerely thank all organizations and individuals who have provided support and assistance to this project. 🎉🎉🎉  
 
-Additionally, we appreciate all the members who participated in this project!
+We also extend our heartfelt gratitude to all team members who contributed to this project!
 
