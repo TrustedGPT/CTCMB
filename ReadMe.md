@@ -270,13 +270,9 @@ Primary Directory (Model Name)
     └── mid.jsonl
 ```
 
-You need to submit your files in a compressed package format. For example, gemini-1.5-pro.zip.
+Please submit your files in a compressed package, such as **gemini-1.5-pro.zip**, and send it to **weiyy53@mail2.sysu.edu.cn**. After the evaluation process is complete, the results will be published on **GitHub**.  
 
-1. You need to click the 'Select File' button and choose the compressed file from your local device.
-2. Click the 'Upload and Process' button; it usually takes 30-60 minutes to grade the submission.
-3. Once processing is complete, you can click the 'Download Evaluation Results' button to download the assessment results.
-4. You may send the score results to [xxx@163.com](mailto:xxx@163.com) for promotional purposes.
-
+If you have any questions, feel free to contact us.
 ## Acknowledgments
 
 We would like to extend our heartfelt thanks to XXX for the tremendous support provided to this project. 🎉🎉🎉
