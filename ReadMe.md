@@ -62,7 +62,7 @@ git clone "https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks.git"&& cd TC
 | HuatuoGPT2-34B             | 45.1              | 57.5                        | 58                         | 38.27         | 23            | 42.65             | 24   |
 ## 😊Dataset Description
 
-![pie-nest](https://github.com/Wayyuanyuan/CTCMB/blob/main/pics/line-simple.png)
+![pie-nest](https://github.com/Wayyuanyuan/CTCMB/blob/main/pics/line-simple-en.png)
 
 #### **Data Structure**
 
