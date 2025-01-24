@@ -266,12 +266,10 @@ python main.py --step-chat data/ --local-model  /mnt/data1/MedLLM_baselines/Taiy
     └── mid.jsonl
 ```
 
-你需要采用压缩包的方式提交。比如 gemini-1.5-pro.zip
+请将文件以压缩包形式提交，例如 **gemini-1.5-pro.zip**。压缩包请发送至邮箱 **weiyy53@mail2.sysu.edu.cn**。
+我们将在评估完成后，于 **GitHub** 平台公布结果。  
 
-   1. 你需要点击“选择文件”按钮，选择本地的压缩包文件。 
-   2. 点击“上传并处理”按钮，通常需要30-60min钟即可对答案进行评分。
-   3. 处理完成后，你可以点击“下载评估结果”按钮下载评估结果。
-   4. 可以将结果分数发送至xxx@163.com进行宣传。
+如有疑问，请随时与我们联系。
 
 
 ## 致谢
