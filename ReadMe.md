@@ -111,7 +111,6 @@ TCM-ED, TCM-DS, and TCM-SRT are objective questions, while the rest are subjecti
 
 Ensure that your development environment has installed the Python libraries required by the [requirements.txt file](https://github.com/Wayyuanyuan/TCM-Assessment-Benchmarks/blob/main/requirements.txt).
 
-### Q&A Module
 
 Currently, we provide an invocation template based on the OpenAI library, as well as three invocation templates for open-source libraries on Hugging Face: `HuatuoGPT-II`, `Taiyi-LLM`, and `WiNGPT2`. If you need support for additional invocations, please extend the `ChatInvoker` interface from the `make_answer/chat/chat_invoker.py` module.
 
