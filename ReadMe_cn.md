@@ -275,7 +275,7 @@ python main.py --step-chat data/ --local-model  /mnt/data1/MedLLM_baselines/Taiy
 ## 致谢
 
 
-我们衷心感谢×××对本项目的巨大支持。🎉🎉🎉
+We sincerely thank all organizations and individuals who have provided support and assistance to this project. 🎉🎉🎉  
 
-同时，感谢参与本项目的全体成员！
+We also extend our heartfelt gratitude to all team members who contributed to this project!
 
